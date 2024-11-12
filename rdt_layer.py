@@ -6,7 +6,6 @@ class RDTLayer(object):
     layer to resolve issues over an unreliable channel.
     """
 
-    # Class Scope Variables
     DATA_LENGTH = 4 # in characters                     # length of the string data that will be sent per packet...
     FLOW_CONTROL_WIN_SIZE = 15 # in characters          # receive window size for flow-control
     sendChannel = None                                  # channel used for sending data

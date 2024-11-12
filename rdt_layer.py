@@ -7,12 +7,12 @@ class RDTLayer(object):
     """
 
     # Class Scope Variables
-    DATA_LENGTH = 4 # in characters                     # The length of the string data that will be sent per packet...
-    FLOW_CONTROL_WIN_SIZE = 15 # in characters          # Receive window size for flow-control
-    sendChannel = None
-    receiveChannel = None
-    dataToSend = ''
-    currentIteration = 0                                # Use this for segment 'timeouts'
+    DATA_LENGTH = 4 # in characters                     # length of the string data that will be sent per packet...
+    FLOW_CONTROL_WIN_SIZE = 15 # in characters          # receive window size for flow-control
+    sendChannel = None                                  # channel used for sending data
+    receiveChannel = None                               # channel used for revieving data
+    dataToSend = ''                                     # data payload
+    currentIteration = 0                                # used for segment timeouts
     # Add items as needed...
 
     def __init__(self):

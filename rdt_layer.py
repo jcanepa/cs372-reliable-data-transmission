@@ -95,12 +95,12 @@ class RDTLayer(object):
         # The seqnum is the sequence number for the segment (in character number, not bytes)
 
         # there is no new data to send
-        if (self.dataToSend == ''):
+        if self.dataToSend == '':
             self.isServer = True
             return
 
         # application is a server
-        if (self.isServer is True):
+        if self.isServer is True:
             return
 
         # instance is a client with data to send, please proceed...
@@ -132,17 +132,17 @@ class RDTLayer(object):
                         break
 
                     x += self.DATA_LENGTH
-                    if(x == seqnum):
+                    if x == seqnum:
                         isComplete = True
                         break
 
                     x += self.DATA_LENGTH
-                    if(x == seqnum):
+                    if x == seqnum:
                         break
 
                     x += self.DATA_LENGTH - 1
 
-                if(isComplete):
+                if isComplete:
                     lowerBound = seqnum - 1
                     upperBound = seqnum + 3
 
@@ -157,7 +157,7 @@ class RDTLayer(object):
                     self.flowCheck += 3
 
                 # Ensure that the string index will not be out of range
-                while(upperBound > len(self.dataToSend)):
+                while (upperBound > len(self.dataToSend)):
                     upperBound -= 1
 
                 # Take 3 or 4 chars to send
@@ -175,14 +175,14 @@ class RDTLayer(object):
                 self.sendChannel.send(segment_send)
 
             # no timeout has occured, proceed with sending previously untransmitted segments
-            elif(self.sentData < len(self.dataToSend)):
+            elif (self.sentData < len(self.dataToSend)):
                 seqnum = self.seqCount
                 lowerBound = self.sentData
 
                 self.packetNum += 1
 
                 # Send 3 characters of data for every 4th new packet
-                if(self.packetNum == 4):
+                if (self.packetNum == 4):
                     self.seqCount += self.DATA_LENGTH - 1
                     upperBound = self.sentData + self.DATA_LENGTH - 1
                     self.packetNum = 0
@@ -193,7 +193,7 @@ class RDTLayer(object):
                     upperBound = self.sentData + self.DATA_LENGTH
 
                 # Prevent index errors
-                while(upperBound > len(self.dataToSend)):
+                while (upperBound > len(self.dataToSend)):
                     upperBound -= 1
 
                 # Take 3 or 4 characters to send
